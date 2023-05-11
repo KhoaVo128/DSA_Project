@@ -136,7 +136,13 @@ public class GUI extends JFrame {
                             g.fillRect(i*sqd + 10 + 10, j*sqd+sqd +10 , 20,40);
                             g.fillRect(i*sqd +10, j*sqd+sqd+10+10, 40,20);
                             g.fillRect(i*sqd+10+5, j*sqd+sqd+10+5, 30,30);
-                            endgame();
+                            for(int a=0;a<12;a++) {
+                                for (int b = 0; b < 6; b++) {
+                                    if (mines[a][b] == 1) {
+                                        revealed[a][b] = true;
+                                    }
+                                }
+                            }
 
                         }
                     }
@@ -228,13 +234,5 @@ public class GUI extends JFrame {
         return false;
     }
 
-    void endgame(){
-        for(int a=0;a<12;a++) {
-            for (int b = 0; b < 6; b++) {
-                if (mines[a][b] == 1) {
-                    revealed[a][b] = true;
-                }
-            }
-        }
-    }
+
 }
