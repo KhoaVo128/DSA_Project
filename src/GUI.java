@@ -99,8 +99,11 @@ public class GUI extends JFrame {
                     g.fillRect(spacing+i*sqd, spacing+j*sqd+sqd, sqd-2*spacing, sqd-2*spacing);
                     if(revealed[i][j] == true){
                         g.setColor(Color.BLACK);
-                        if(mines[i][j]==0 && neighbors[i][j]!=0){
+                        if(mines[i][j]==0){
                             switch (neighbors[i][j]){
+                                case 0:
+                                    g.setColor(Color.WHITE);
+                                    break;
                                 case 1:
                                     g.setColor(Color.BLUE);
                                     break;
@@ -122,6 +125,9 @@ public class GUI extends JFrame {
                                 case 7:
                                     g.setColor(Color.DARK_GRAY);
                                     break;
+                                case 8:
+                                g.setColor(Color.YELLOW);
+                                break;
                             }
                             g.setFont(new Font("Tahoma", Font.BOLD,sqd/2));
                             g.drawString(Integer.toString(neighbors[i][j]),i*sqd+22,j*sqd+sqd+40);
@@ -130,13 +136,7 @@ public class GUI extends JFrame {
                             g.fillRect(i*sqd + 10 + 10, j*sqd+sqd +10 , 20,40);
                             g.fillRect(i*sqd +10, j*sqd+sqd+10+10, 40,20);
                             g.fillRect(i*sqd+10+5, j*sqd+sqd+10+5, 30,30);
-                            for(int a=0;a<12;a++){
-                                for(int b=0;b<6;b++){
-                                    if(mines[a][b]==1){
-                                        revealed[a][b]=true;
-                                    }
-                                }
-                            }
+                            endgame();
 
                         }
                     }
@@ -226,5 +226,15 @@ public class GUI extends JFrame {
             return true;
         }
         return false;
+    }
+
+    void endgame(){
+        for(int a=0;a<12;a++) {
+            for (int b = 0; b < 6; b++) {
+                if (mines[a][b] == 1) {
+                    revealed[a][b] = true;
+                }
+            }
+        }
     }
 }
